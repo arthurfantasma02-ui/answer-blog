@@ -1,0 +1,31 @@
+
+.header {
+  width: 100%;
+  padding: 1rem 2rem;
+  background-color: var(--foreground);
+  color: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header_title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-right: 2rem;
+}
+
+.header_title a:hover {
+  color:rgb(173, 176, 176)
+}
+
+.header_nav {
+  display: flex;
+  gap: 1rem;
+  text-align: center;
+}
+
+.header_nav a:hover {
+  color:rgb(173, 176, 176)
+}
