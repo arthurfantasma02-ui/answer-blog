@@ -1,0 +1,13 @@
+.article {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.article h2 {
+  color: #333;
+}
+
+.article p {
+  color: #666;
+}

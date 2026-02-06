@@ -1,10 +1,19 @@
 
+import {Artigo} from "@/artigos/artigos";
+import Card from "@/components/Card";
 import styles from "./Grid.module.css";
+
+
+
 type Props = {
-  artigos: string;
+  artigo: Artigo[];
 };
-const Grid = ({artigos} : Props) => {
-  return <section className={styles.Grid}>{artigos}</section>;
-};
+const Grid = ({ artigo }: Props) => {
+  return <section className={styles.Grid}>
+    {artigo.map((artigo) => (
+      <Card artigo={artigo} key={artigo.slug} />
+    ))}
+  </section>;
+}
 
 export default Grid;
