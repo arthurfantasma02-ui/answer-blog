@@ -1,5 +1,5 @@
 
-import {Artigo} from "@/artigos/artigos";
+import {Artigo} from "@/app/Data/artigos";
 import Card from "@/components/Card";
 import styles from "./Grid.module.css";
 

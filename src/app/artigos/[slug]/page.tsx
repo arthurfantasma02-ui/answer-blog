@@ -1,20 +1,69 @@
-import { Artigo } from "@/artigos/artigos";
-type props = {
-  artigo: Artigo;
+import { notFound } from "next/navigation";
+import { getArtigos } from "@/app/Data/artigos";
+import styles from "./page.module.css";
+
+
+/**
+ * Tipagem correta para Next 15/16
+ * params agora é Promise
+ */
+type Props = {
+  params: Promise<{
+    slug: string;
+  }>;
 };
 
-const ArtigoPage = ({artigo} : props ) => {
-    
-  return <div>
-    <h1>{artigo.title}</h1>
-    <img src={artigo.img} alt={artigo.slug} />
-    <p>{artigo.description}</p>
-    {Array.isArray(artigo.content) ? (
-      artigo.content.map((paragraph, index) => <p key={index}>{paragraph}</p>)
-    ) : (
-      <p>{artigo.content}</p>
-    )}
-  </div>;
-};
+/**
+ * Página do artigo
+ */
+export default async function ArtigosPage({ params }: Props) {
+  // 🔥 Desembrulha o params corretamente
+  const { slug } = await params;
 
-export default ArtigoPage;
+  // Busca os artigos
+  const artigos = await getArtigos();
+
+  // Encontra o artigo pelo slug
+  const artigo = artigos.find((a) => a.slug === slug);
+
+  // Se não encontrar → 404 real
+  if (!artigo) {
+    notFound();
+  }
+
+  return (
+    <article className={styles.article}>
+      <h1 className={styles.article_h1}>
+        {artigo.title}
+      </h1>
+
+
+      <div className={styles.article_p}>
+        {artigo.content.map((paragrafo, index) => (
+          <p key={index}>{paragrafo}</p>
+        ))}
+      </div>
+    </article>
+  );
+}
+
+/**
+ * Metadata dinâmica (SEO)
+ */
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
+
+  const artigos = await getArtigos();
+  const artigo = artigos.find((a) => a.slug === slug);
+
+  if (!artigo) {
+    return {
+      title: "Artigo não encontrado",
+    };
+  }
+
+  return {
+    title: artigo.title,
+    description: artigo.description,
+  };
+}
