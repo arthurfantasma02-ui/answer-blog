@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Answer Blog 🎧✍️
 
-## Getting Started
+Aplicação de blog criada com **Next.js (App Router)**, onde os artigos são carregados dinamicamente através de rotas personalizadas. O projeto utiliza **Server Components**, geração estática (SSG) e **SEO dinâmico** por artigo.
 
-First, run the development server:
+Este projeto foi desenvolvido como atividade prática para consolidar conceitos modernos do Next.js.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🚀 Objetivo do Projeto
+
+Criar uma aplicação de blog que:
+
+* Liste artigos em uma página inicial
+* Renderize cada artigo em uma rota dinâmica baseada em *slug*
+* Utilize boas práticas de SEO
+* Faça uso do App Router e Server Components
+
+---
+
+## 🧱 Estrutura de Rotas
+
+```
+app/
+├─ page.tsx                # Página inicial (lista de artigos)
+└─ artigos/
+   └─ [slug]/
+      └─ page.tsx          # Página dinâmica do artigo
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Fonte dos Dados
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Os dados dos artigos são carregados a partir de um **JSON local**, abstraído por uma função de acesso (`getArtigos`).
 
-## Learn More
+Cada artigo contém:
 
-To learn more about Next.js, take a look at the following resources:
+* `slug`
+* `title`
+* `description`
+* `author`
+* `date`
+* `content`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+O carregamento é feito diretamente em **Server Components**, utilizando `async/await`, sem uso de `useEffect`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## ⚙️ Data Fetching & Renderização
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* Utilização de **SSG (Static Site Generation)**
+* Função `generateStaticParams` para pré-gerar todas as rotas dos artigos
+* Configuração `dynamic = "force-static"`
+* Tratamento de rotas inválidas com `notFound()`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🔍 SEO Dinâmico
+
+Cada artigo possui metadados próprios gerados dinamicamente com:
+
+```ts
+export async function generateMetadata({ params })
+```
+
+Metadados implementados:
+
+* `title`
+* `description`
+
+Isso garante melhor indexação e compartilhamento em redes sociais.
+
+---
+
+## 🧩 Componentização
+
+O layout do projeto é organizado com componentes reutilizáveis:
+
+* **Card** → exibição resumida do artigo
+* **Grid** → organização visual da listagem
+
+Essa abordagem melhora a manutenção, leitura e escalabilidade do código.
+
+---
+
+## 🎨 Tipografia
+
+O projeto utiliza **next/font**, garantindo melhor performance e carregamento otimizado das fontes.
+
+---
+
+## 🌐 Deploy
+
+O projeto está pronto para deploy na **Vercel**:
+
+1. Repositório hospedado no GitHub
+2. Deploy realizado via Vercel
+3. Aplicação acessível publicamente
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+* Next.js (App Router)
+* React
+* TypeScript
+* CSS Modules
+* Vercel
+
+---
+
+## 📌 Repositório
+
+🔗 [https://github.com/arthurfantasma02-ui/answer-blog](https://github.com/arthurfantasma02-ui/answer-blog)
+
+---
+
+> Projeto desenvolvido com foco em aprendizado prático e consolidação dos conceitos modernos do Next.js.
