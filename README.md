@@ -114,5 +114,9 @@ O projeto está pronto para deploy na **Vercel**:
 🔗 [https://github.com/arthurfantasma02-ui/answer-blog](https://github.com/arthurfantasma02-ui/answer-blog)
 
 ---
+## 🚀 Projeto Online
+
+Link do site:
+https://answer-blog.vercel.app
 
 > Projeto desenvolvido com foco em aprendizado prático e consolidação dos conceitos modernos do Next.js.
