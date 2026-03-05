@@ -1,32 +1,39 @@
-name: CI Pipeline
+name: CI/CD Vercel
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do código
-        uses: actions/checkout@v4
+      - name: Checkout código
+        uses: actions/checkout@v3
 
       - name: Instalar Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: 18
 
       - name: Instalar dependências
         run: npm ci
 
-      - name: Rodar lint
+      - name: Rodar Lint
         run: npm run lint
 
-      - name: Rodar testes
+      - name: Rodar Testes
         run: npm run test
 
-      - name: Build
+      - name: Rodar Build
         run: npm run build
+
+      - name: Instalar Vercel CLI
+        run: npm install -g vercel
+
+      - name: Deploy para Vercel
+        if: github.ref == 'refs/heads/main'
+        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }} --confirm
